@@ -31,7 +31,7 @@ class CGPBuilder {
 	}
 	
 	def CGPBuilder agregarServicios(List<Servicio> servicio) {
-		cgp.servicios1.addAll(servicio)
+		cgp.servicios.addAll(servicio)
 		this
 	}
 

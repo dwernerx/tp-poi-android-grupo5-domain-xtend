@@ -11,8 +11,7 @@ import org.uqbar.commons.utils.Observable
 @Accessors
 class Cgp extends Poi {
 	Comuna comuna
-	List<Servicio> servicios1 = new ArrayList<Servicio>
-	List<String> servicios = new ArrayList<String>
+	List<Servicio> servicios = new ArrayList<Servicio>
 
 	new(Comuna _comuna, Direccion _miDireccion) {
 		comuna = _comuna
@@ -20,6 +19,17 @@ class Cgp extends Poi {
 	}
 	
 	new() {}
+	
+	def List<String> getListaServicios(){
+		var int i;
+		var List<String> serviciosStrings = new ArrayList<String>();
+        for(i=0; i<servicios.size(); i++){
+            serviciosStrings.add(servicios.get(i).toString());
+        }
+
+//		return StringUtilities.join("\n", serviciosStrings)
+		return serviciosStrings
+	} 
 	
 	override getNombre(){
 		comuna.numeroComuna
@@ -30,15 +40,15 @@ class Cgp extends Poi {
 	}
 
 	override estaDisponible(DateTime momento) {
-		servicios1.exists[s|s.estaDisponible(momento)]
+		servicios.exists[s|s.estaDisponible(momento)]
 	}
 
 	def boolean estaDisponible(DateTime momento, String valorBuscado) {
-		servicios1.exists[s|StringUtilities.match(s.nombre, valorBuscado) && s.estaDisponible(momento)]
+		servicios.exists[s|StringUtilities.match(s.nombre, valorBuscado) && s.estaDisponible(momento)]
 	}
 
 	override matchearPoi(String valorBuscado) {
-		super.matchearPoi(valorBuscado)/*StringUtilities.match(comuna.getNumeroComuna, valorBuscado)*/ || StringUtilities.alMenosUnServicioComienzaCon(valorBuscado, servicios1)|| matchearNombrePoi(valorBuscado)
+		super.matchearPoi(valorBuscado)/*StringUtilities.match(comuna.getNumeroComuna, valorBuscado)*/ || StringUtilities.alMenosUnServicioComienzaCon(valorBuscado, servicios)|| matchearNombrePoi(valorBuscado)
 	}
 
 }

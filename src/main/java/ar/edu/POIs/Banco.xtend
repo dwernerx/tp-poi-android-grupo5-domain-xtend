@@ -23,6 +23,10 @@ class Banco extends Poi {
 	}
 	
 	new() {	}
+	
+	def List<String> getListaServicios(){
+		return servicios
+	}
 
 	override matchearPoi(String valorBuscado) {
 		StringUtilities.queComienceCon(valorBuscado, nombreBanco) || super.matchearPoi(valorBuscado)|| matchearNombrePoi(valorBuscado)//StringUtilities.match(nombreBancoMasBarrio(), valorBuscado)

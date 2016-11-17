@@ -18,4 +18,8 @@ class Servicio {
 	def boolean estaDisponible(DateTime momento) {
 		horario.estaDisponible(momento)
 	}
+	
+	override String toString(){
+		return nombre + " " + horario.toString() + " hs."
+	}
 }
